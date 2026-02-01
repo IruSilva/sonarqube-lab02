@@ -2,7 +2,7 @@ package com.example;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
 
@@ -19,7 +19,7 @@ class CalculatorTest {
     }
 
     @Test
-    void shouldAddAgainOp() {
+    void shouldAddAgainUsingCalculate() {
         assertEquals(15, calc.calculate(10, 5, "add-again"));
     }
 
@@ -29,7 +29,7 @@ class CalculatorTest {
     }
 
     @Test
-    void shouldSubtractAgainOp() {
+    void shouldSubtractAgain() {
         assertEquals(5, calc.calculate(10, 5, "sub-again"));
     }
 
@@ -49,44 +49,52 @@ class CalculatorTest {
     }
 
     @Test
-    void shouldDivideNegativeNumbers() {
-        assertEquals(-2, calc.calculate(-10, 5, "div"));
-    }
-
-    @Test
-    void shouldModWithZeroRemainder() {
+    void shouldModWhenEvenlyDivisible() {
         assertEquals(0, calc.calculate(10, 5, "mod"));
     }
 
     @Test
-    void shouldModWithNonZeroRemainder() {
+    void shouldModWhenNotEvenlyDivisible() {
         assertEquals(1, calc.calculate(10, 3, "mod"));
     }
 
     @Test
-    void shouldPowPositiveExponent() {
+    void shouldPowWithPositiveExponent() {
         assertEquals(1000, calc.calculate(10, 3, "pow"));
     }
 
     @Test
-    void shouldPowZeroExponent() {
-        // loop not entered, should return initial result = 1
+    void shouldPowWithZeroExponent() {
         assertEquals(1, calc.calculate(10, 0, "pow"));
     }
 
     @Test
-    void shouldPowNegativeExponentReturnsOneInThisImplementation() {
-        // loop not entered because i < b is false when b is negative
-        assertEquals(1, calc.calculate(10, -2, "pow"));
+    void shouldPowWithNegativeExponentGivesDefaultResult() {
+        // your current implementation loops from 0 to b; if b is negative, loop won't run
+        // so result stays 1
+        assertEquals(1, calc.calculate(10, -3, "pow"));
     }
 
     @Test
-    void shouldReturnZeroForUnknownOp() {
-        assertEquals(0, calc.calculate(10, 5, "anything"));
+    void shouldReturnZeroForUnknownOperation() {
+        assertEquals(0, calc.calculate(10, 5, "unknown"));
     }
 
     @Test
-    void shouldTestAddAgainMethodToo() {
+    void shouldCoverAddAgainMethodDirectly() {
         assertEquals(15, calc.addAgain(10, 5));
+    }
+
+    @Test
+    void shouldHandleNegativeNumbers() {
+        assertEquals(-5, calc.calculate(-10, 5, "add"));
+        assertEquals(-15, calc.calculate(-10, 5, "sub"));
+        assertEquals(-50, calc.calculate(-10, 5, "mul"));
+    }
+
+    @Test
+    void shouldHandleDivisionWithNegative() {
+        assertEquals(-2, calc.calculate(-10, 5, "div"));
+        assertEquals(2, calc.calculate(-10, -5, "div"));
     }
 }
