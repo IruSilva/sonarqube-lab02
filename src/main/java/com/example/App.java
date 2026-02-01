@@ -1,15 +1,13 @@
-package main.java.com.example;
+package com.example;
+
+import java.util.logging.Logger;
 
 public class App {
 
-    public static void main(String[] args) throws Exception {
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
+    public static void main(String[] args) {
         Calculator calc = new Calculator();
-
-        System.out.println(calc.calculate(10, 5, "add"));
-
-        UserService service = new UserService();
-        service.findUser("admin");
+        LOGGER.info(() -> "Result: " + calc.calculate(10, 5, "add-again"));
     }
 }
-

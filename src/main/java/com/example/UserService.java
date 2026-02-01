@@ -1,31 +1,54 @@
-package main.java.com.example;
+package com.example;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserService {
 
-    // SECURITY ISSUE: Hardcoded credentials
-    private String password = "admin123";
+    // still simple for lab, but not hardcoded
+    private final String password;
 
-    // VULNERABILITY: SQL Injection
-    public void findUser(String username) throws Exception {
-
-        Connection conn =
-            DriverManager.getConnection("jdbc:mysql://localhost/db",
-                    "root", password);
-
-        Statement st = conn.createStatement();
-
-        String query =
-            "SELECT * FROM users WHERE name = '" + username + "'";
-
-        st.executeQuery(query);
+    public UserService() {
+        // Reads from environment variable. In GitHub Actions you can set it as a secret if needed.
+        this.password = System.getenv("DB_PASSWORD");
     }
 
-    // SMELL: Unused method
-    public void notUsed() {
-        System.out.println("I am never called");
+    protected Connection openConnection() throws SQLException {
+    return DriverManager.getConnection(
+            "jdbc:mysql://localhost/db",
+            "root",
+            password
+    );
+}
+
+    // Fixed: PreparedStatement prevents SQL injection + closes resources safely
+    public void findUser(String username) throws SQLException {
+        String query = "SELECT id, name FROM users WHERE name = ?";
+
+
+        try (Connection conn = openConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, username);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                // no-op (lab)
+            }
+        }
+    }
+
+    // Fixed: PreparedStatement + try-with-resources
+    public void deleteUser(String username) throws SQLException {
+        String query = "DELETE FROM users WHERE name = ?";
+
+        try (Connection conn = openConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, username);
+            ps.executeUpdate();
+        }
     }
 }
