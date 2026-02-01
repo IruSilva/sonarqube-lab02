@@ -1,49 +1,60 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
 
-    Calculator calc = new Calculator();
+    private final Calculator calc = new Calculator();
 
     @Test
-    void testAdd() {
+    void shouldAdd() {
         assertEquals(15, calc.calculate(10, 5, "add"));
     }
 
     @Test
-    void testSub() {
+    void shouldAddAgain() {
+        assertEquals(15, calc.calculate(10, 5, "add-again"));
+    }
+
+    @Test
+    void shouldSubtract() {
         assertEquals(5, calc.calculate(10, 5, "sub"));
     }
 
     @Test
-    void testMul() {
+    void shouldSubtractAgain() {
+        assertEquals(5, calc.calculate(10, 5, "sub-again"));
+    }
+
+    @Test
+    void shouldMultiply() {
         assertEquals(50, calc.calculate(10, 5, "mul"));
     }
 
     @Test
-    void testDiv() {
+    void shouldDivide() {
         assertEquals(2, calc.calculate(10, 5, "div"));
     }
 
     @Test
-    void testDivByZero() {
+    void shouldReturnZeroWhenDivideByZero() {
         assertEquals(0, calc.calculate(10, 0, "div"));
     }
 
     @Test
-    void testMod() {
+    void shouldMod() {
         assertEquals(0, calc.calculate(10, 5, "mod"));
     }
 
     @Test
-    void testPow() {
-        assertEquals(100, calc.calculate(10, 2, "pow"));
+    void shouldPow() {
+        assertEquals(1000, calc.calculate(10, 3, "pow"));
     }
 
     @Test
-    void testDefault() {
-        assertEquals(0, calc.calculate(10, 5, "unknown"));
+    void shouldReturnZeroForUnknownOp() {
+        assertEquals(0, calc.calculate(10, 5, "anything"));
     }
 }
