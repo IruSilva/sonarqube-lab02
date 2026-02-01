@@ -38,6 +38,6 @@ GITHUB_TOKEN: ${{ secrets.silvahdit214198f_lab2}}
 SONAR_TOKEN: ${{ secrets.silvahdit214198f}} 
 run: | 
 mvn sonar:sonar \ 
- -Dsonar.projectKey=YOUR_PROJECT_KEY \ 
- -Dsonar.organization=YOUR_ORG_KEY \ 
+ -Dsonar.projectKey=silvahdit214198f_lab2 \ 
+ -Dsonar.organization=silvahdit214198f \ 
  -Dsonar.host.url=https://sonarcloud.io
