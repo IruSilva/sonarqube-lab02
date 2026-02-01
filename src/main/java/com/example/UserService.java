@@ -16,13 +16,13 @@ public class UserService {
         this.password = System.getenv("DB_PASSWORD");
     }
 
-    private Connection openConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:mysql://localhost/db",
-                "root",
-                password
-        );
-    }
+    protected Connection openConnection() throws SQLException {
+    return DriverManager.getConnection(
+            "jdbc:mysql://localhost/db",
+            "root",
+            password
+    );
+}
 
     // Fixed: PreparedStatement prevents SQL injection + closes resources safely
     public void findUser(String username) throws SQLException {
