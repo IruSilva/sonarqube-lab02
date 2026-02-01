@@ -3,35 +3,47 @@ package com.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorTest {
+public class CalculatorTest {
+
+    Calculator calc = new Calculator();
 
     @Test
     void testAdd() {
-        Calculator c = new Calculator();
-        assertEquals(15, c.calculate(10,5,"add"));
+        assertEquals(15, calc.calculate(10, 5, "add"));
     }
 
     @Test
     void testSub() {
-        Calculator c = new Calculator();
-        assertEquals(5, c.calculate(10,5,"sub"));
+        assertEquals(5, calc.calculate(10, 5, "sub"));
     }
 
     @Test
     void testMul() {
-        Calculator c = new Calculator();
-        assertEquals(50, c.calculate(10,5,"mul"));
+        assertEquals(50, calc.calculate(10, 5, "mul"));
     }
 
     @Test
     void testDiv() {
-        Calculator c = new Calculator();
-        assertEquals(2, c.calculate(10,5,"div"));
+        assertEquals(2, calc.calculate(10, 5, "div"));
+    }
+
+    @Test
+    void testDivByZero() {
+        assertEquals(0, calc.calculate(10, 0, "div"));
+    }
+
+    @Test
+    void testMod() {
+        assertEquals(0, calc.calculate(10, 5, "mod"));
     }
 
     @Test
     void testPow() {
-        Calculator c = new Calculator();
-        assertEquals(1000, c.calculate(10,3,"pow"));
+        assertEquals(100, calc.calculate(10, 2, "pow"));
+    }
+
+    @Test
+    void testDefault() {
+        assertEquals(0, calc.calculate(10, 5, "unknown"));
     }
 }
