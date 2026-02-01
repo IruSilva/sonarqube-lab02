@@ -6,14 +6,8 @@ public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
         Calculator calc = new Calculator();
-        int result = calc.calculate(10, 5, "add-again");
-        LOGGER.info("Calculation result: " + result);
-
-        UserService service = new UserService();
-        service.findUser("admin");
-        service.deleteUser("admin"); // NEW dangerous call
+        LOGGER.info(() -> "Result: " + calc.calculate(10, 5, "add-again"));
     }
 }

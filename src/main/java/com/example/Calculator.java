@@ -3,39 +3,24 @@ package com.example;
 public class Calculator {
 
     public int calculate(int a, int b, String op) {
+        if (op == null) return 0;
 
-        if ("add".equals(op)) {
+        if (op.equals("add") || op.equals("add-again")) {
             return a + b;
-
-        } else if ("add-again".equals(op)) {
-            return a + b; // intentional duplication for the lab
-
-        } else if ("sub".equals(op)) {
+        } else if (op.equals("sub") || op.equals("sub-again")) {
             return a - b;
-
-        } else if ("sub-again".equals(op)) {
-            return a - b; // intentional duplication for the lab
-
-        } else if ("mul".equals(op)) {
+        } else if (op.equals("mul")) {
             return a * b;
-
-        } else if ("div".equals(op)) {
-            if (b == 0) {
-                return 0;
-            }
+        } else if (op.equals("div")) {
+            if (b == 0) return 0;
             return a / b;
-
-        } else if ("mod".equals(op)) {
+        } else if (op.equals("mod")) {
             return a % b;
-
-        } else if ("pow".equals(op)) {
+        } else if (op.equals("pow")) {
             int result = 1;
-            for (int i = 0; i < b; i++) {
-                result *= a;
-            }
+            for (int i = 0; i < b; i++) result *= a;
             return result;
         }
-
         return 0;
     }
 
