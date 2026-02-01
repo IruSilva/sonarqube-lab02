@@ -9,12 +9,17 @@ class CalculatorTest {
     private final Calculator calc = new Calculator();
 
     @Test
+    void shouldReturnZeroWhenOpIsNull() {
+        assertEquals(0, calc.calculate(10, 5, null));
+    }
+
+    @Test
     void shouldAdd() {
         assertEquals(15, calc.calculate(10, 5, "add"));
     }
 
     @Test
-    void shouldAddAgain() {
+    void shouldAddAgainOp() {
         assertEquals(15, calc.calculate(10, 5, "add-again"));
     }
 
@@ -24,7 +29,7 @@ class CalculatorTest {
     }
 
     @Test
-    void shouldSubtractAgain() {
+    void shouldSubtractAgainOp() {
         assertEquals(5, calc.calculate(10, 5, "sub-again"));
     }
 
@@ -44,17 +49,44 @@ class CalculatorTest {
     }
 
     @Test
-    void shouldMod() {
+    void shouldDivideNegativeNumbers() {
+        assertEquals(-2, calc.calculate(-10, 5, "div"));
+    }
+
+    @Test
+    void shouldModWithZeroRemainder() {
         assertEquals(0, calc.calculate(10, 5, "mod"));
     }
 
     @Test
-    void shouldPow() {
+    void shouldModWithNonZeroRemainder() {
+        assertEquals(1, calc.calculate(10, 3, "mod"));
+    }
+
+    @Test
+    void shouldPowPositiveExponent() {
         assertEquals(1000, calc.calculate(10, 3, "pow"));
+    }
+
+    @Test
+    void shouldPowZeroExponent() {
+        // loop not entered, should return initial result = 1
+        assertEquals(1, calc.calculate(10, 0, "pow"));
+    }
+
+    @Test
+    void shouldPowNegativeExponentReturnsOneInThisImplementation() {
+        // loop not entered because i < b is false when b is negative
+        assertEquals(1, calc.calculate(10, -2, "pow"));
     }
 
     @Test
     void shouldReturnZeroForUnknownOp() {
         assertEquals(0, calc.calculate(10, 5, "anything"));
+    }
+
+    @Test
+    void shouldTestAddAgainMethodToo() {
+        assertEquals(15, calc.addAgain(10, 5));
     }
 }
