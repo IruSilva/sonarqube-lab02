@@ -26,7 +26,8 @@ public class UserService {
 
     // Fixed: PreparedStatement prevents SQL injection + closes resources safely
     public void findUser(String username) throws SQLException {
-        String query = "SELECT * FROM users WHERE name = ?";
+        String query = "SELECT id, name FROM users WHERE name = ?";
+
 
         try (Connection conn = openConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
