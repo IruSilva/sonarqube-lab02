@@ -2,56 +2,44 @@ package com.example;
 
 public class Calculator {
 
-    // EVEN WORSE: longer, more complex, duplicated logic
     public int calculate(int a, int b, String op) {
 
-        if (op.equals("add")) {
+        if ("add".equals(op)) {
             return a + b;
 
-        } else if (op.equals("add-again")) {
-            return a + b; // DUPLICATION
+        } else if ("add-again".equals(op)) {
+            return a + b; // intentional duplication for the lab
 
-        } else if (op.equals("sub")) {
+        } else if ("sub".equals(op)) {
             return a - b;
 
-        } else if (op.equals("sub-again")) {
-            return a - b; // DUPLICATION
+        } else if ("sub-again".equals(op)) {
+            return a - b; // intentional duplication for the lab
 
-        } else if (op.equals("mul")) {
+        } else if ("mul".equals(op)) {
             return a * b;
 
-        } else if (op.equals("div")) {
+        } else if ("div".equals(op)) {
             if (b == 0) {
                 return 0;
-            } else {
-                return a / b;
             }
+            return a / b;
 
-        } else if (op.equals("mod")) {
+        } else if ("mod".equals(op)) {
             return a % b;
 
-        } else if (op.equals("pow")) {
+        } else if ("pow".equals(op)) {
             int result = 1;
             for (int i = 0; i < b; i++) {
-                result = result * a;
+                result *= a;
             }
             return result;
-
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
-    // Code Duplication (students must remove)
-    public int addNumbers(int x, int y) {
-        return x + y;
-    }
-
-    public int sumValues(int a, int b) {
-        return a + b;
-    }
-
-    // INTENTIONAL DUPLICATION
+    // intentional duplication (keep only this one extra method)
     public int addAgain(int a, int b) {
         return a + b;
     }
